@@ -32,6 +32,11 @@ SDK de .NET 8.0
 
 Node.js (v18 o superior)
 
+Clonar el proyecto 
+```
+git clone https://github.com/alexandermejiadev/ProCredit.git
+```
+
 # 🛠️ Instrucciones de Instalación y Ejecución
 
 ## 1. Levantar el Backend (API)
