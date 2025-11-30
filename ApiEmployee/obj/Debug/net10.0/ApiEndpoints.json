@@ -27,6 +27,43 @@
   },
   {
     "ContainingType": "ApiEmployee.Controllers.EmployeesController",
+    "Method": "Update",
+    "RelativePath": "api/Employees/{docNumber}",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "docNumber",
+        "Type": "System.String",
+        "IsRequired": true
+      },
+      {
+        "Name": "employee",
+        "Type": "ApiEmployee.Models.Employee",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiEmployee.Controllers.EmployeesController",
+    "Method": "Delete",
+    "RelativePath": "api/Employees/{docNumber}",
+    "HttpMethod": "DELETE",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "docNumber",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "ApiEmployee.Controllers.EmployeesController",
     "Method": "SearchByDepartment",
     "RelativePath": "api/Employees/search/{department}",
     "HttpMethod": "GET",

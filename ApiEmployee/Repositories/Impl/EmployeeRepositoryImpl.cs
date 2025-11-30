@@ -47,5 +47,35 @@ namespace ApiEmployee.Repositories.Impl
             var all = await ReadDataAsync();
             return all.Where(e => e.Department.Contains(department, StringComparison.OrdinalIgnoreCase));
         }
+
+        private async Task SaveDataAsync(List<Employee> list)
+        {
+            var json = JsonSerializer.Serialize(list, _options);
+            await File.WriteAllTextAsync(_filePath, json);
+        }
+
+        public async Task<bool> UpdateAsync(Employee employee)
+        {
+            var list = await ReadDataAsync();
+            var index = list.FindIndex(e => e.DocNumber == employee.DocNumber);
+
+            if (index == -1) return false; // No encontrado
+
+            list[index] = employee; // Reemplazamos el objeto
+            await SaveDataAsync(list);
+            return true;
+        }
+
+        public async Task<bool> DeleteAsync(string docNumber)
+        {
+            var list = await ReadDataAsync();
+            var employee = list.FirstOrDefault(e => e.DocNumber == docNumber);
+
+            if (employee == null) return false; // No encontrado
+
+            list.Remove(employee);
+            await SaveDataAsync(list);
+            return true;
+        }
     }
 }

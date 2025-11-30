@@ -1,15 +1,31 @@
 import { Modal, Form, Input, InputNumber, Select } from 'antd';
 import { UserOutlined, DollarOutlined } from '@ant-design/icons';
+import { useEffect } from 'react';
 
 const { Option } = Select;
 
-const EmployeeModal = ({ open, onCreate, onCancel, loading }) => {
+const EmployeeModal = ({ open, onEditCreate, onCancel, loading, initialValues }) => {
+
     const [form] = Form.useForm();
+    const isEditing = !!initialValues;
+
+
+    useEffect(() => {
+        if (open) {
+            if (initialValues) {
+                // Si hay datos, rellenamos el formulario
+                form.setFieldsValue(initialValues);
+            } else {
+                // Si no hay datos (es nuevo), limpiamos los campos
+                form.resetFields();
+            }
+        }
+    }, [open, initialValues, form]);
 
     const handleOk = async () => {
         try {
             const values = await form.validateFields();
-            onCreate(values); // Enviamos los datos al padre
+            onEditCreate(values);
             form.resetFields(); // Limpiamos si todo salió bien
         } catch (error) {
             console.log('Validación fallida:', error);
@@ -26,7 +42,7 @@ const EmployeeModal = ({ open, onCreate, onCancel, loading }) => {
         >
             <Form form={form} layout="vertical">
                 <Form.Item name="docNumber" label="Cédula" rules={[{ required: true, len: 10, message: 'Debe tener 10 dígitos' }]}>
-                    <Input placeholder="171..." />
+                    <Input placeholder="171..." disabled={isEditing} />
                 </Form.Item>
 
                 <div style={{ display: 'flex', gap: 10 }}>
@@ -53,7 +69,7 @@ const EmployeeModal = ({ open, onCreate, onCancel, loading }) => {
                         <InputNumber style={{ width: '100%' }} />
                     </Form.Item>
                     <Form.Item name="salary" label="Salario" style={{ flex: 1 }} rules={[{ required: true }]}>
-                        <InputNumber style={{ width: '100%' }} prefix={<DollarOutlined />} />
+                        <InputNumber style={{ width: '100%' }} min={1} prefix={<DollarOutlined />} />
                     </Form.Item>
                 </div>
 

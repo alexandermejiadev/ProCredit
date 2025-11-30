@@ -13,6 +13,7 @@ const App = () => {
   const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
+  const [initialValues, setInitialValues] = useState(null);
 
   const loadData = async (searchTerm = '') => {
     setLoading(true);
@@ -35,6 +36,25 @@ const App = () => {
     }
   };
 
+  const handleEdit = (record) => {
+    setInitialValues(record);
+    setIsModalOpen(true);
+
+  }
+
+  const handleDelete = async (docNumber) => {
+    setLoading(true);
+    try {
+      await employeeService.delete(docNumber);
+      message.success('Eliminado correctamente');
+      loadData();
+    } catch (error) {
+      message.error('Error al eliminar');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
     const timer = setTimeout(() => {
       loadData(searchTerm);
@@ -46,11 +66,17 @@ const App = () => {
 
   useEffect(() => { loadData(); }, []);
 
-  const handleCreate = async (values) => {
+  const handleEditCreate = async (values) => {
     setLoading(true);
     try {
-      await employeeService.create(values);
-      message.success('Guardado correctamente');
+      if (initialValues) {
+        await employeeService.update(initialValues.docNumber, values);
+        message.success('Editado correctamente');
+
+      } else {
+        await employeeService.create(values);
+        message.success('Guardado correctamente');
+      }
       setIsModalOpen(false);
       loadData();
     } catch (error) {
@@ -84,7 +110,10 @@ const App = () => {
               <Button
                 type="primary"
                 icon={<PlusOutlined />}
-                onClick={() => setIsModalOpen(true)}
+                onClick={() => {
+                  setInitialValues(null)
+                  setIsModalOpen(true)
+                }}
                 block={window.innerWidth < 768} // Botón ancho completo solo en móvil
               >
                 Nuevo Empleado
@@ -92,13 +121,14 @@ const App = () => {
             </Col>
           </Row>
 
-          <EmployeeTable employees={employees} loading={loading} />
+          <EmployeeTable employees={employees} loading={loading} onEdit={handleEdit} onDelete={handleDelete} />
         </Card>
       </Content>
 
       <EmployeeModal
+        initialValues={initialValues}
         open={isModalOpen}
-        onCreate={handleCreate}
+        onEditCreate={handleEditCreate}
         onCancel={() => setIsModalOpen(false)}
         loading={loading}
       />

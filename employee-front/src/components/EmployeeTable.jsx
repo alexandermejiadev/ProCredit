@@ -1,7 +1,7 @@
-import { Table, Space } from 'antd';
-import { IdcardOutlined } from '@ant-design/icons';
+import { Table, Space, Button, Tooltip, Popconfirm } from 'antd';
+import { IdcardOutlined, EditOutlined, DeleteOutlined } from '@ant-design/icons';
 
-const EmployeeTable = ({ employees, loading }) => {
+const EmployeeTable = ({ employees, loading, onEdit, onDelete }) => {
 
     const columns = [
         {
@@ -29,7 +29,9 @@ const EmployeeTable = ({ employees, loading }) => {
             filters: [
                 { text: 'IT', value: 'IT' },
                 { text: 'Ventas', value: 'Ventas' },
-                { text: 'RRHH', value: 'Recursos Humanos' }
+                { text: 'RRHH', value: 'Recursos Humanos' },
+                { text: 'Finanzas', value: 'Finanzas' },
+                { text: 'Producción', value: 'Producción' }
             ],
             onFilter: (value, record) => record.department.indexOf(value) === 0
         },
@@ -39,8 +41,49 @@ const EmployeeTable = ({ employees, loading }) => {
             key: 'salary',
             render: v => <span style={{ color: 'green' }}>${v}</span>
         },
+        {
+            title: 'Acciones',
+            key: 'action',
+            render: (_, record) => (
+                <Space>
+
+                    <Button
+                        type="primary"
+                        icon={<EditOutlined />}
+                        onClick={() => onEdit(record)}
+                    >
+                        Editar
+                    </Button>
+
+
+                    {/* BOTÓN ELIMINAR CON CONFIRMACIÓN */}
+                    <Popconfirm
+                        title="¿Eliminar empleado?"
+                        description={`¿Seguro que deseas eliminar a ${record.name}?`}
+                        onConfirm={() => onDelete(record.docNumber)}
+                        okText="Sí, eliminar"
+                        cancelText="Cancelar"
+                        okButtonProps={{ danger: true }}
+                    >
+                        <Button
+                            danger
+                            type="primary"
+                            icon={<DeleteOutlined />}
+                        >
+                            Eliminar
+                        </Button>
+                    </Popconfirm>
+                </Space>
+            )
+        }
     ];
 
+    const handleEdit = (record) => {
+        console.log('Editar', record);
+    };
+    const handleDelete = (docNumber) => {
+        console.log('Eliminar', docNumber);
+    };
     return (
         <Table
             columns={columns}

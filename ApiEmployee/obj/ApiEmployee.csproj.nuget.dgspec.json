@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\patri\\OneDrive\\Documents\\ProCredit\\ApiEmployee\\ApiEmployee.csproj": {}
+    "C:\\Users\\patri\\OneDrive\\Desktop\\ProCredit\\ApiEmployee\\ApiEmployee.csproj": {}
   },
   "projects": {
-    "C:\\Users\\patri\\OneDrive\\Documents\\ProCredit\\ApiEmployee\\ApiEmployee.csproj": {
+    "C:\\Users\\patri\\OneDrive\\Desktop\\ProCredit\\ApiEmployee\\ApiEmployee.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\patri\\OneDrive\\Documents\\ProCredit\\ApiEmployee\\ApiEmployee.csproj",
+        "projectUniqueName": "C:\\Users\\patri\\OneDrive\\Desktop\\ProCredit\\ApiEmployee\\ApiEmployee.csproj",
         "projectName": "ApiEmployee",
-        "projectPath": "C:\\Users\\patri\\OneDrive\\Documents\\ProCredit\\ApiEmployee\\ApiEmployee.csproj",
+        "projectPath": "C:\\Users\\patri\\OneDrive\\Desktop\\ProCredit\\ApiEmployee\\ApiEmployee.csproj",
         "packagesPath": "C:\\Users\\patri\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\patri\\OneDrive\\Documents\\ProCredit\\ApiEmployee\\obj\\",
+        "outputPath": "C:\\Users\\patri\\OneDrive\\Desktop\\ProCredit\\ApiEmployee\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

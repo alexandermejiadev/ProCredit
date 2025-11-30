@@ -49,7 +49,28 @@ namespace ApiEmployee.Controllers
             }
         }
 
+        [HttpPut("{docNumber}")]
+        public async Task<IActionResult> Update(string docNumber, Employee employee)
+        {
+            if (docNumber != employee.DocNumber)
+                return BadRequest("El número de documento no coincide.");
+
+            var updated = await _repository.UpdateAsync(employee);
+
+            if (!updated) return NotFound($"Empleado con cédula {docNumber} no encontrado.");
+
+            return NoContent(); // 204 No Content es estándar para updates exitosos
+        }
 
 
+        [HttpDelete("{docNumber}")]
+        public async Task<IActionResult> Delete(string docNumber)
+        {
+            var deleted = await _repository.DeleteAsync(docNumber);
+
+            if (!deleted) return NotFound($"Empleado con cédula {docNumber} no encontrado.");
+
+            return NoContent();
+        }
     }
 }
