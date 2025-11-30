@@ -32,9 +32,10 @@ SDK de .NET 8.0
 
 Node.js (v18 o superior)
 
-Clonar el proyecto 
+Clonar el proyecto y ingresar la carpeta
 ```
 git clone https://github.com/alexandermejiadev/ProCredit.git
+cd ProCredit
 ```
 
 # 🛠️ Instrucciones de Instalación y Ejecución
