@@ -92,6 +92,8 @@ Búsqueda: Buscador por departamento con "debounce" (retraso) para optimizar pet
 
 Registro (Modal): Formulario emergente con validaciones.
 
+Actulizar y eliminar empleados
+
 Diseño Responsivo: Interfaz usando Ant Design.
 
 Arquitectura: Separación de lógica de negocio (Servicios) y UI (Componentes).
