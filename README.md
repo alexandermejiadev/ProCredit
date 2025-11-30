@@ -88,7 +88,7 @@ Abre el navegador en la URL que te indique (http://localhost:5173).
 
 Listado de Empleados: Visualización en tabla con ordenamiento por columnas.
 
-Búsqueda en Vivo: Buscador por departamento con "debounce" (retraso) para optimizar peticiones.
+Búsqueda: Buscador por departamento con "debounce" (retraso) para optimizar peticiones.
 
 Registro (Modal): Formulario emergente con validaciones.
 
